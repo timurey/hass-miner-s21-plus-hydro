@@ -14,7 +14,7 @@ try:
 except ImportError:
     from .patch import install_package
 
-    install_package(f"pyasic=={PYASIC_VERSION}")
+    install_package(f"git+https://github.com/timurey/pyasic-s21-plus-hyd@feature/s21plushyd")
     import pyasic
 
 from homeassistant.components.number import NumberEntityDescription, NumberDeviceClass

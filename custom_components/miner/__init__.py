@@ -8,7 +8,7 @@ except ImportError:
     from .patch import install_package
     from .const import PYASIC_VERSION
 
-    install_package(f"pyasic=={PYASIC_VERSION}")
+    install_package(f"git+https://github.com/timurey/pyasic-s21-plus-hyd@feature/s21plushyd")
     import pyasic
 
 from homeassistant.config_entries import ConfigEntry
