@@ -2542,7 +2542,7 @@ tomli-w = ">=1.0.0"
 type = "git"
 url = "https://github.com/timurey/pyasic-s21-plus-hyd"
 reference = "feature/s21plushyd"
-resolved_reference = "d026927163c75b9b62c5c45474f6b1487bcdc173"
+resolved_reference = "78113eaf37af52c9cb538e48c3beedd45a4252de"
 
 [[package]]
 name = "pycares"
