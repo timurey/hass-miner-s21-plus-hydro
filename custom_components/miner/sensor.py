@@ -163,7 +163,7 @@ async def async_setup_entry(
     for s in coordinator.data["miner_sensors"]:
         sensors.append(_create_miner_entity(s))
     for board in range(coordinator.miner.expected_hashboards):
-        for s in ["outlet_temperature", "inlet_temperature","board_temperature", "chip_temperature", "board_hashrate"]:
+        for s in ["board_temperature", "chip_temperature", "outlet_temperature", "inlet_temperature", "board_hashrate"]:
             sensors.append(_create_board_entity(board, s))
     for fan in range(coordinator.miner.expected_fans):
         for s in ["fan_speed"]:
