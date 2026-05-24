@@ -15,6 +15,7 @@ _UV_ENV_PYTHON_VARS = (
     "UV_PYTHON",
 )
 
+
 # Copy-paste of home assistant core install, but pre-releases are supported
 def install_package(
     package: str,
@@ -22,6 +23,7 @@ def install_package(
     target: str | None = None,
     constraints: str | None = None,
     timeout: int | None = None,
+    force_reinstall: bool = False,
 ) -> bool:
     """Install a package on PyPi. Accepts pip compatible package strings.
 
@@ -49,6 +51,8 @@ def install_package(
         env["HTTP_TIMEOUT"] = str(timeout)
     if upgrade:
         args.append("--upgrade")
+    if force_reinstall:
+        args.append("--reinstall")
     if constraints is not None:
         args += ["--constraint", constraints]
     if target:

@@ -51,7 +51,7 @@ ENTITY_DESCRIPTION_KEY_MAP: dict[str, SensorEntityDescription] = {
         device_class=SensorDeviceClass.TEMPERATURE,
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
-    "inlet_temperature": SensorEntityDescription(
+        "inlet_temperature": SensorEntityDescription(
         key="Inlet Temperature",
         native_unit_of_measurement=UnitOfTemperature.CELSIUS,
         suggested_unit_of_measurement=UnitOfTemperature.CELSIUS,
@@ -77,6 +77,11 @@ ENTITY_DESCRIPTION_KEY_MAP: dict[str, SensorEntityDescription] = {
         key="Ideal Hashrate",
         native_unit_of_measurement=TERA_HASH_PER_SECOND,
         state_class=SensorStateClass.MEASUREMENT,
+        entity_category=EntityCategory.DIAGNOSTIC,
+    ),
+    "active_preset_name": SensorEntityDescription(
+        key="Active Preset Name",
+        device_class=SensorDeviceClass.ENUM,
         entity_category=EntityCategory.DIAGNOSTIC,
     ),
     "board_hashrate": SensorEntityDescription(
@@ -162,16 +167,10 @@ async def async_setup_entry(
     sensors = []
     for s in coordinator.data["miner_sensors"]:
         sensors.append(_create_miner_entity(s))
-    for board in range(coordinator.miner.expected_hashboards):
-        for s in [
-            "board_temperature",
-            "chip_temperature",
-            "outlet_temperature",
-            "inlet_temperature",
-            "board_hashrate",
-        ]:
+    for board in range(coordinator.miner.expected_hashboards or 3):
+        for s in ["board_temperature", "chip_temperature", "outlet_temperature", "inlet_temperature", "board_hashrate"]:
             sensors.append(_create_board_entity(board, s))
-    for fan in range(coordinator.miner.expected_fans):
+    for fan in range(coordinator.miner.expected_fans or 4):
         for s in ["fan_speed"]:
             sensors.append(_create_fan_entity(fan, s))
     async_add_entities(sensors)
